@@ -1,0 +1,321 @@
+<?xml version="1.2" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Classroom module Stared -->
+            <!-- Classroom from stared -->
+                <record id="view_classroom_form" model="ir.ui.view">
+                    <field name="name">hr.classroom.form</field>
+                    <field name="model">hr.classroom</field>
+                    <field name="type">form</field>
+                    <field name="arch" type="xml">
+                        <form string="Classroom Form">
+                                <sheet>
+                                    <group>
+                                        <field name="designation_classroom"/>
+                                        <field name="person_number"/>
+                                    </group>
+                                </sheet>>
+                        </form>
+                    </field>
+                </record>
+            <!-- End of Classroom form -->
+            <!-- Classroom Tree Stared -->
+                <record id="view_classroom_tree" model="ir.ui.view">
+                    <field name="name">hr.classroom.tree</field>
+                    <field name="model">hr.classroom</field>
+                    <field name="type">tree</field>
+                    <field name="arch" type="xml">
+                        <tree string="Classroom List">
+                            <field name="classroom_id"/>
+                            <field name="designation_classroom"/>
+                            <field name="person_number"/>
+                        </tree>
+                    </field>
+                </record>
+            <!-- End of Classroom Tree -->
+            <!--  Classroom Action stared -->
+                <record model="ir.actions.act_window" id="action_classroom"> 
+                    <field name="name">Classrooms</field> 
+                    <field name="res_model">hr.classroom</field> 
+                    <field name="view_type">form</field> 
+                    <field name="view_mode">tree,form</field>
+                </record>
+            <!-- End of Classroom Action -->
+            <!--  Classroom Sequences Stared -->
+                <record id="seq_classroom_id_type" model="ir.sequence.type">
+                    <field name="name">Classroom</field>
+                    <field name="code">hr.classroom</field>
+                </record>
+
+                <record id="seq_classroom_id" model="ir.sequence">
+                    <field name="name">Classroom Order</field>
+                    <field name="code">hr.classroom</field>
+                    <field name="prefix">Classroom</field>
+                    <field name="padding">4</field>
+                    <field name="company_id" eval="False"/>
+                </record>
+            <!-- End of Classroom Sequences  -->
+        <!-- End of Classroom Part -->
+
+        <!-- Discipline Part Stared -->
+            <!-- Discipline from stared -->
+                <record id="view_discipline_form" model="ir.ui.view">
+                    <field name="name">hr.discipline.form</field>
+                    <field name="model">hr.discipline</field>
+                    <field name="type">form</field>
+                    <field name="arch" type="xml">
+                        <form string="Discipline Form">
+                            <sheet>
+                                <group>
+                                    <field name="designation_discipline"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </record>
+            <!-- end of Discipline form -->
+            <!-- Discipline tree stared -->
+                <record id="view_discipline_tree" model="ir.ui.view">
+                    <field name="name">hr.discipline.tree</field>
+                    <field name="model">hr.discipline</field>
+                    <field name="type">tree</field>
+                    <field name="arch" type="xml">
+                        <tree string="Discipline List">
+                            <field name="discipline_id"/>
+                            <field name="designation_discipline"/>
+                        </tree>
+                    </field>
+                </record>
+            <!-- End of Discipline Tree -->
+            <!--  discipline Action stared -->
+                <record model="ir.actions.act_window" id="action_discipline"> 
+                    <field name="name">Discipline</field> 
+                    <field name="res_model">hr.discipline</field> 
+                    <field name="view_type">form</field> 
+                    <field name="view_mode">tree,form</field>
+                </record>
+            <!-- End of Discipline Action -->
+            <!--  Discipline Sequences Stared -->
+                <record id="seq_discipline_id_type" model="ir.sequence.type">
+                    <field name="name">Discipline</field>
+                    <field name="code">hr.discipline</field>
+                </record>
+
+                <record id="seq_discipline_id" model="ir.sequence">
+                    <field name="name">Discipline Order</field>
+                    <field name="code">hr.discipline</field>
+                    <field name="prefix">Discipline</field>
+                    <field name="padding">4</field>
+                    <field name="company_id" eval="False"/>
+                </record>
+            <!-- End of Discipline Sequences  -->
+        <!-- end of Discipline Part -->
+
+         <!-- Action Photo stared -->
+            <record id="action_take_photo" model="ir.actions.client">
+                <field name="name">Take Picture</field>
+                <field name="tag">photo.action</field>
+            </record>
+
+            <record id="view_attendance_form" model="ir.ui.view">
+                <field name="name">hr.attendance.form.webcam</field>
+                <field name="model">hr.attendance</field>
+                <field name="inherit_id" ref="hr_attendance.view_attendance_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='name']" position="after">
+                        <button name="%(action_take_photo)" type="action" string="Take Picture"/>
+                    </xpath>
+                </field>
+            </record>
+            <record id="action_client_employees_menu" model="ir.actions.client">
+                <field name="name">Open Employees Menu</field>
+                <field name="tag">hr_webcam.menu</field>
+                <field name="params" eval="{'menu_id': ref('hr.menu_open_view_employee_list_my')}"/>
+            </record>
+
+            <template id="assets_backend" name="hr_webcam assets" inherit_id="web.assets_backend">
+                <xpath expr="." position="inside">
+                    <link rel="stylesheet" href="/hr_webcam/static/src/css/hr_webcam.css"/>
+                    <script type="text/javascript" src="/hr_webcam/static/src/js/jquery.webcam.js"></script>
+                    <script type="text/javascript" src="/hr_webcam/static/src/js/hr_webcam.js"></script>
+                </xpath>
+            </template>
+
+            <record id="action_take_photo" model="ir.actions.client">
+                <field name="name">Take Picture</field>
+                <field name="tag">photo.action</field>
+            </record>
+            
+        <!-- End of Action Photo -->
+
+        <!--  Employee  Attendances Stared -->
+            <!-- Employee Attendances Form Stared -->
+                <record id="view_attendance_form" model="ir.ui.view">
+                    <field name="name">hr.attendance.form</field>
+                    <field name="model">hr.attendance</field>
+                    <field name="inherit_id" ref="hr_attendance.view_attendance_form"/>
+                    <field name="arch" type="xml">
+                        <form string="Employee attendances">
+                            <xpath expr="//field[@name='action_desc']" position="after">
+                                <sheet>
+                                    <group>
+                                        <br/><br/>
+                                        <field name="classroom" />
+                                        <field name="discipline" />
+                                        <field name="date" />
+                                        <field name="start_time" />
+                                        <field name="sharp_time" />
+                                        <field name="uptime" />
+                                        <field name="digital_signature" />
+                                        <field name="control_signature" />
+                                        <field name="image" widget="image" class="oe_left oe_avatar"/>
+                                    </group>
+                                </sheet>
+                            </xpath>
+                        </form>
+                    </field>
+                </record>
+            <!-- End of Employee Attendances form -->
+            <!-- Employee Attendance graph stared -->
+                <record id="view_attendance_graph" model="ir.ui.view">
+                    <field name="name">hr.attendance.graph</field>
+                    <field name="model">hr.attendance</field>
+                    <field name="arch" type="xml">
+                        <graph string="Total Employee Attendance" type="bar">
+                            <field name="name" />
+                            <field name="uptime" operator="+"/>
+                        </graph>
+                    </field>
+                </record>
+             <!-- End of Attendance graph  -->
+            <!--  Employee Attendances Tree Stared -->
+                <record id="view_attendance_tree" model="ir.ui.view">
+                    <field name="name">hr.attendance.tree</field>
+                    <field name="model">hr.attendance</field>
+                    <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+                    <field name="arch" type="xml">
+                            <tree string="Employee attendances">
+                                    <field name="classroom" />
+                                    <field name="discipline" />
+                                    <field name="date" />
+                                    <field name="start_time" />
+                                    <field name="sharp_time" />
+                                    <field name="uptime" /> 
+                                    <field name="digital_signature" />
+                                    <field name="control_signature" />
+                            </tree>
+                    </field>
+                </record>
+            <!-- End of Employee Attendances Tree -->
+            <!--  Employee Attendances Action Stared -->
+                <record model="ir.actions.act_window" id="action_attendance"> 
+                    <field name="name">Attendance</field> 
+                    <field name="res_model">hr.attendance</field> 
+                    <field name="view_type">form</field> 
+                    <field name="view_mode">tree,form,graph</field>
+                </record>
+            <!-- End of Employee Attendances Action -->
+        <!-- End of Employee Attendances Part -->
+
+        <!--  Employee  Part Stared -->
+            <!-- Employee Form Stared -->
+                <record id="view_employee_form" model="ir.ui.view">
+                    <field name="name">hr.employee.form</field>
+                    <field name="model">hr.employee</field>
+                    <field name="inherit_id" ref="hr.view_employee_form"/>
+                    <field name="arch" type="xml">
+                        <form string="Employee" > 
+                            <xpath expr="//field[@name='name']" position="after">
+                                <sheet>
+                                    <group>
+                                        <field name="teacher"/>
+                                        <field name="timetable_volume" />
+                                    </group>
+                                        <notebook >
+                                        <page string="Summary Table">
+                                            <field name="summary_elements" colspan="4" nolabel="1">
+                                                <tree string="Order lines" editable="bottom">
+                                                     <field name='date' on_change="(date, start_time, sharp_time, uptime, classroom, discipline, digital_signature, control_signature, context)"/>
+                                                        <field name='sharp_time' on_change="(date, start_time, sharp_time, uptime, classroom, discipline, digital_signature, control_signature, context)"/>
+                                                        <field name='sharp_time' on_change="(date, start_time, sharp_time, uptime, classroom, discipline, digital_signature, control_signature, context)"/>
+                                                        <field name= 'uptime' on_change="(date, start_time, sharp_time, uptime, classroom, discipline, digital_signature, control_signature, context)"/>
+                                                        <field name='classroom' on_change="(date, start_time, sharp_time, uptime, classroom, discipline, digital_signature, control_signature, context)"/>
+                                                        <field name='discipline' on_change="(date, start_time, sharp_time, uptime, classroom, discipline, digital_signature, control_signature, context)"/>
+                                                        <field name='digital_signature' on_change="(date, start_time, sharp_time, uptime, classroom, discipline, digital_signature, control_signature, context)"/>
+                                                        <field name='control_signature' on_change="(date, start_time, sharp_time, uptime, classroom, vat_amount, digital_signature, control_signature, context)"/>
+                                                </tree>
+                                            </field>
+                                        </page>
+                                   </notebook>
+                                </sheet> 
+                            </xpath>  
+                        </form>
+                    </field>
+                </record>
+            <!-- End of Employee  form -->
+             <!-- Employee  graph stared -->
+                <record id="view_employee_graph" model="ir.ui.view">
+                    <field name="name">hr.employee.graph</field>
+                    <field name="model">hr.employee</field>
+                    <field name="arch" type="xml">
+                        <graph string="Total Employee  " type="bar">
+                            <field name="name" />
+                            <field name="timetable_volume" operator="+"/>
+                        </graph>
+                    </field>
+                </record>
+             <!-- End of Employee graph  -->
+            <!--  Employee  Tree Stared -->
+                <record id="view_employee_tree" model="ir.ui.view">
+                    <field name="name">hr.employee.tree</field>
+                    <field name="model">hr.employee</field>
+                    <field name="inherit_id" ref="hr.view_employee_tree"/>
+                    <field name="arch" type="xml">
+                        <tree string="Employees">
+                                <field name="teacher"/>
+                                <field name="timetable_volume" />
+                        </tree>
+                    </field>
+                </record>
+            <!-- End of Employee  Tree -->
+            <!--  Employee  Action Stared -->
+                <record model="ir.actions.act_window" id="action_employee"> 
+                    <field name="name">Employee</field> 
+                    <field name="res_model">hr.employee</field> 
+                    <field name="view_type">form</field> 
+                    <field name="view_mode">tree,form,graph</field>
+                </record>
+            <!-- End of Employee  Action -->
+            <!--  Employee Wizzard View stared -->
+               
+            <!--  End of Employee Wizzard View -->
+            <!-- Employee Report Stared -->
+                <record id="employee_report_action" model="ir.actions.server">
+                    <field name="name">Drownload the Word file of Employee</field>
+                    <field name="type">ir.actions.server</field>
+                    <field name="model_id" ref="model_hr_employee"/>
+                    <field name="state">code</field>
+                    <field name="code">action = self.employee_report_docx(cr, uid, context.get('active_ids'), context=context)</field>
+                </record>
+                <record id="employee_reprot_action_view" model="ir.values">
+                    <field name="model_id" ref="model_hr_employee"/>
+                    <field name="name">Drownload the Word file of Employee</field>
+                    <field name="key2">client_action_multi</field>
+                    <field name="value" eval= "'ir.actions.server,' + str(ref('employee_report_action'))"/>
+                    <field name="key">action</field>
+                    <field name="model">hr.employee</field>
+                </record>
+            <!-- End of Employee report -->
+        <!-- End of Employee  part -->
+
+        <!-- All memus stared -->
+        <menuitem id="attendance_for_school" name="Attendance For Schools"/>
+           <menuitem name="ATTENDANCE FOR SCHOOLS" id="section_main_menu_attendance_for_school" parent="attendance_for_school"/>
+           <menuitem name="Discipline" id="choix_discipline" parent="section_main_menu_attendance_for_school" action="action_discipline"/>
+           <menuitem name="Classroom" id="choix_classroom" parent="section_main_menu_attendance_for_school" action="action_classroom"/>
+           <menuitem name="Attendances " id="choix_attendances" parent="section_main_menu_attendance_for_school" action="action_attendance"/>
+           <menuitem name="Employee" id="choix_employee" parent="section_main_menu_attendance_for_school" action="action_employee"/>
+
+    </data>
+</openerp>
+    
